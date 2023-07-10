@@ -33,8 +33,8 @@ const postRouter = require('./server/routes/post.router');
 app.use('/post', postRouter);
 
 // build router
-// app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, '/public')));
 
-// app.get('*', function (res, req) {
-//   req.sendFile(path.join(__dirname, '/build/index.html'));
-// });
+app.get('*', function (res, req) {
+  req.sendFile(path.join(__dirname, '/public/index.html'));
+});
