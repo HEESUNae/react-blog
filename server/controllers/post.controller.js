@@ -1,9 +1,13 @@
 const postModel = require('../models/post.model');
 
 //* CREATE
+
 const createPost = async (req, res, next) => {
   try {
-    const createPost = await postModel.create(req.body);
+    const createPost = await postModel.create({
+      ...req.body,
+      name: req.session.user.name,
+    });
     res.status(201).json(createPost);
   } catch (err) {
     next(err);

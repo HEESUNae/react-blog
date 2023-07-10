@@ -23,9 +23,6 @@ const loginUser = async (req, res, next) => {
     if (getUser) {
       // db 세션 저장
       req.session.user = { id: getUser.id, name: getUser.name };
-      // 로그인 여부 (페이지 접속)
-      res.cookie('isLogin', true);
-      console.log(req.session);
       res.status(200).json(getUser);
     } else {
       res.status(404).json({ message: '존재하지 않는 회원입니다.' });
@@ -38,10 +35,9 @@ const loginUser = async (req, res, next) => {
 //* LOGOUT
 const logoutUser = async (req, res, next) => {
   try {
-    if (req.session.user) {
+    if (req.session) {
       req.session.destroy(() => {
         res.clearCookie('user');
-        res.cookie('isLogin', false);
         res.status(200).json({ message: '쿠키삭제' });
       });
     }
