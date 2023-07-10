@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-require('dotenv').config();
-const { MODE } = process.env;
+const { HOST } = process.env;
 
 export const axiosApi = axios.create({
-  baseURL: MODE === 'production' ? 'https://react-blog-eight-kappa.vercel.app' : 'http://localhost:4444',
+  baseURL: HOST,
   timeout: 1000,
 });
