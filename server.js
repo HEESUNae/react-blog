@@ -1,6 +1,9 @@
+require('dotenv').config();
+const { PORT, DATABASE_URL, DATABASE_NAME } = process.env;
+
 const express = require('express');
 const app = express();
-const port = 4444;
+const port = PORT;
 const path = require('path');
 
 // json parsing
@@ -13,8 +16,8 @@ app.use(cors());
 // mongodb connect
 const { default: mongoose } = require('mongoose');
 mongoose
-  .connect('mongodb+srv://heesun:hs5132@express-project.nurobjn.mongodb.net/', {
-    dbName: 'react-blog',
+  .connect(DATABASE_URL, {
+    dbName: DATABASE_NAME,
   })
   .then(() => {
     console.log('mongodb connected');

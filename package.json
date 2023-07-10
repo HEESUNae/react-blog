@@ -16,6 +16,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.3.2",
+    "notenv": "^2.0.3",
+    "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -26,7 +28,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm-run-all --parallel start:**",
+    "start:client": "react-scripts start",
+    "start:server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
