@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosApi } from '../../api/response';
-import { useNavigate } from 'react-router-dom';
+import Layout from '../../components/layout/Layout';
 
 interface PostListType {
   _id: string;
@@ -11,8 +11,8 @@ interface PostListType {
 
 const PostList = () => {
   const [postList, setPostList] = useState<PostListType[]>([]);
-  const navigate = useNavigate();
 
+  // 리스트 글 렌더링
   const postListData = async () => {
     try {
       const { data } = await axiosApi.get('/post/list');
@@ -24,21 +24,13 @@ const PostList = () => {
     }
   };
 
-  const logoutUser = async () => {
-    try {
-      const data = await axiosApi.get('/user/logout');
-      navigate('/');
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+  // 새로고칠시
   useEffect(() => {
     postListData();
   }, []);
 
   return (
-    <div>
+    <Layout>
       {postList.map((item) => (
         <div key={item._id}>
           <p>{item.title}</p>
@@ -46,8 +38,8 @@ const PostList = () => {
           <p>{item?.name}</p>
         </div>
       ))}
-      <button onClick={logoutUser}>로그아웃</button>
-    </div>
+      {/* <button onClick={logoutUser}>로그아웃</button> */}
+    </Layout>
   );
 };
 

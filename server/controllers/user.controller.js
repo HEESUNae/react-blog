@@ -23,9 +23,9 @@ const loginUser = async (req, res, next) => {
     if (getUser) {
       // db 세션 저장
       req.session.user = { id: getUser.id, name: getUser.name };
-      res.status(200).json(getUser);
+      res.status(200).json({ message: 'login succese' });
     } else {
-      res.status(404).json({ message: '존재하지 않는 회원입니다.' });
+      res.status(401).json({ message: '존재하지 않는 회원입니다.' });
     }
   } catch (e) {
     next(e);
@@ -33,21 +33,8 @@ const loginUser = async (req, res, next) => {
 };
 
 //* LOGOUT
-const logoutUser = async (req, res, next) => {
-  try {
-    if (req.session) {
-      req.session.destroy(() => {
-        res.clearCookie('user');
-        res.status(200).json({ message: '쿠키삭제' });
-      });
-    }
-  } catch (e) {
-    next(e);
-  }
-};
 
 module.exports = {
   createUser,
   loginUser,
-  logoutUser,
 };
