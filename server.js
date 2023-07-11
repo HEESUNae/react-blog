@@ -49,7 +49,7 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: DATABASE_URL, dbName: DATABASE_NAME }),
     name: 'user', // cookie name
-    // proxy: true,
+    proxy: true,
   })
 );
 
